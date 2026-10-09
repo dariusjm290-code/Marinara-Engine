@@ -83,7 +83,7 @@ export async function findClaudeCodeInstall(
   bundledVersion: string | null = BUNDLED_CLAUDE_CODE_VERSION,
   { env = process.env, home = homedir(), probe = probeVersion } = {},
 ): Promise<ClaudeCodeInstall | null> {
-  if (!isClaudeSubscriptionInstalledCliEnabled(env.CLAUDE_SUBSCRIPTION_USE_INSTALLED_CLI)) return null;
+  if (!isClaudeSubscriptionInstalledCliEnabled(env.CLAUDE_SUBSCRIPTION_USE_INSTALLED_CLI ?? "")) return null;
   // Without the bundled version there is no safe floor, so keep the bundled build.
   if (!bundledVersion) return null;
   for (const path of candidatePaths(env, home)) {
